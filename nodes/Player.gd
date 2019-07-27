@@ -3,32 +3,37 @@ extends KinematicBody2D
 const UP = Vector2(0, -1)
 
 export var gravity = 30
-export var h_speed = 2000
 export var v_speed = 1000
 
 var motion = Vector2()
+var is_controllable = true
+var can_attack = true
 
 func _ready():
 	$Sprite.animation = "run"
+	motion.x = 500
 
 func _physics_process(delta):
 	
 	# Calculer la gravité
 	motion.y += gravity
-	motion.x = h_speed
+	set_text(str(motion.x))
 	
-	# Check Input
-	if is_on_floor():
-		#Attack
-		if Input.is_action_just_pressed("ui_accept"):
-			$Sprite.animation="attack"
-			$AttackRange/CollisionShape.disabled = false
-			$AttackCooldown.start()
+	if is_controllable:
+		motion.x += 0.3
 		
-		#Jump
-		if Input.is_action_pressed("ui_up"):
-			motion.y = -v_speed
-			$Sprite.animation="jump_start"
+		# Check Input
+		if is_on_floor():
+			#Attack
+			if Input.is_action_just_pressed("ui_accept") && can_attack:
+				$Sprite.animation="attack"
+				$AttackRange/CollisionShape.disabled = false
+				$AttackCooldown.start()
+			
+			#Jump
+			if Input.is_action_pressed("ui_up"):
+				motion.y = -v_speed
+				$Sprite.animation="jump_start"
 	
 	# Jump animation
 	if !is_on_floor() && motion.y>0:
@@ -50,14 +55,29 @@ func set_text(text):
 	$TestLabel.text = text
 
 func die():
-	set_text("Ugh I am Dead")
+	is_controllable = false
+	$Sprite.animation = "die"
+	motion.x = 0
+	set_collision_layer(2)
 	
-func is_attacking():
-	return $Sprite.animation == "attack"
-
-func _on_Player_stop_attacking():
-	$Sprite.animation = "run"
-	$AttackRange/CollisionShape.disabled = true
+func stun():
+	is_controllable = false
+	
+#func is_attacking():
+#	return $Sprite.animation == "attack"
 
 func _on_Player_hits(body):
 		body.die()
+
+func _on_Player_stops_attacking():
+	
+	# Player stops attacking
+	if $Sprite.animation == "attack":
+		can_attack = false
+		$Sprite.animation = "run"
+		$AttackRange/CollisionShape.disabled = true
+		
+	# Player has finished dying
+
+func _on_AttackCooldown_timeout():
+	can_attack = true

@@ -13,6 +13,10 @@ func _ready():
 	current_segments[1].position = Vector2(0,0)
 	current_segments[1].connect("end_reached", self, "_on_Level_end_reached")
 	add_child(current_segments[1])
+	
+func _process(delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().reload_current_scene()
 
 var rnd_segment
 func _on_Level_end_reached():

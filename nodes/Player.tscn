@@ -70,24 +70,24 @@ position = Vector2( 0, -10.2668 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 1 )
 animation = "run"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 shape = SubResource( 4 )
 
 [node name="Camera" type="Camera2D" parent="."]
-offset = Vector2( 650, 0 )
+offset = Vector2( 500, 0 )
 current = true
 process_mode = 0
 limit_smoothed = true
 smoothing_enabled = true
 
 [node name="TestLabel" type="Label" parent="."]
-margin_left = -87.2671
-margin_top = -385.562
-margin_right = 46.7329
-margin_bottom = -338.562
+margin_left = -40.1045
+margin_top = -215.367
+margin_right = 93.8955
+margin_bottom = -140.367
 custom_fonts/font = SubResource( 3 )
 
 [node name="AttackCooldown" type="Timer" parent="."]
@@ -100,5 +100,7 @@ one_shot = true
 position = Vector2( 80, 0 )
 shape = SubResource( 5 )
 disabled = true
-[connection signal="timeout" from="AttackCooldown" to="." method="_on_Player_stop_attacking"]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Player_stopped_dying"]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Player_stops_attacking"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_Player_hits"]

@@ -19,6 +19,10 @@ config/name="Dungeon Beat'up"
 run/main_scene="res://nodes/Game.tscn"
 config/icon="res://icon.png"
 
+[debug]
+
+settings/fps/force_fps=30
+
 [input]
 
 ui_left={
