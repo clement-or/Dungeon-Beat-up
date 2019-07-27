@@ -23,6 +23,9 @@ func _physics_process(delta):
 		motion.y = -v_speed
 	
 	motion = move_and_slide(motion, UP)
-	
+
+func set_text(text):
+	$TestLabel.text = text
+
 func die():
 	pass
