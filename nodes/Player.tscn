@@ -37,7 +37,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 40.5221, 44.3029 )
+extents = Vector2( 32.5784, 48.7338 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 60
@@ -51,7 +51,8 @@ script = ExtResource( 1 )
 position = Vector2( 9.15385, 5.54779 )
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 1 )
-animation = "jump_end"
+animation = "run"
+frame = 4
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
