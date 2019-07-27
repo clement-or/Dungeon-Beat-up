@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://nodes/Level.gd" type="Script" id=1]
 [ext_resource path="res://assets/minecraft-tileset.png" type="Texture" id=2]
 [ext_resource path="res://nodes/TileMap.gd" type="Script" id=3]
+[ext_resource path="res://nodes/enemies/Goblin.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -186,4 +187,8 @@ shape = SubResource( 9 )
 
 [node name="ConnectionPoint" type="Node2D" parent="."]
 position = Vector2( 5088, 0 )
+
+[node name="Goblin" parent="." instance=ExtResource( 4 )]
+position = Vector2( 865.21, 125.228 )
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]
+[connection signal="hit_player" from="Goblin" to="." method="_on_Goblin_hit_player"]

@@ -1,6 +1,7 @@
 extends Node2D
 
 signal end_reached
+signal player_hit
 
 func _ready():
 	pass
@@ -11,3 +12,6 @@ func _on_End_body_entered(body):
 
 func get_connection_point():
 	return $ConnectionPoint.position + global_position
+
+func _on_Goblin_hit_player():
+	emit_signal("player_hit")
