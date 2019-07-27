@@ -39,7 +39,8 @@ func _physics_process(delta):
 	# Detect death
 	if get_slide_count() > 0:
 		for i in range(get_slide_count()):
-			if "Goblin" in get_slide_collision(i).collider.get_name():
+			var collider = get_slide_collision(i).collider
+			if collider.has_method("is_enemy") && collider.is_enemy():
 				die()
 	
 	# Calculate physics
@@ -57,7 +58,6 @@ func is_attacking():
 func _on_Player_stop_attacking():
 	$Sprite.animation = "run"
 	$AttackRange/CollisionShape.disabled = true
-
 
 func _on_Player_hits(body):
 		body.die()
