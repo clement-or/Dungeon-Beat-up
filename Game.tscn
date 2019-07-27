@@ -1,5 +1,3 @@
 [gd_scene format=2]
 
-[node name="Game" type="Node2D" index="0"]
-
-
+[node name="Game" type="Node2D"]
