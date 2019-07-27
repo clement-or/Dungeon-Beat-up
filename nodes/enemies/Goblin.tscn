@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://nodes/enemies/Goblin.gd" type="Script" id=1]
@@ -6,12 +7,22 @@
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
 "frames": [ ExtResource( 2 ) ],
+=======
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/goblin/walk.png" type="Texture" id=1]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ) ],
+>>>>>>> master
 "loop": true,
 "name": "walk",
 "speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
+<<<<<<< HEAD
 extents = Vector2( 65.7722, 94.7078 )
 
 [node name="Goblin" type="KinematicBody2D"]
@@ -30,3 +41,19 @@ autostart = true
 [node name="Collisionbox" type="CollisionShape2D" parent="."]
 shape = SubResource( 2 )
 [connection signal="timeout" from="DirectionChangeTimer" to="." method="_on_DirectionChangeTimer_timeout"]
+=======
+extents = Vector2( 44.6284, 65.3482 )
+
+[node name="Goblin" type="KinematicBody2D"]
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+scale = Vector2( 0.1, 0.1 )
+frames = SubResource( 1 )
+animation = "walk"
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2( -7.94429, 12.7109 )
+shape = SubResource( 2 )
+
+[node name="DirectionChangeTimer" type="Timer" parent="."]
+>>>>>>> master

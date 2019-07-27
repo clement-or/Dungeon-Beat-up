@@ -34,9 +34,14 @@ animations = [ {
 "speed": 2.0
 } ]
 
+<<<<<<< HEAD
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 51.3332
 height = 90.4339
+=======
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32.5784, 48.7338 )
+>>>>>>> master
 
 [sub_resource type="DynamicFont" id=3]
 size = 60
@@ -51,7 +56,11 @@ position = Vector2( 9.15385, 5.54779 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 1 )
 animation = "run"
+<<<<<<< HEAD
 frame = 2
+=======
+frame = 4
+>>>>>>> master
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
