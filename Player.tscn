@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/skeleton.png" type="Texture" id=2]
@@ -8,7 +8,10 @@
 [ext_resource path="res://assets/player/run/3.png" type="Texture" id=6]
 [ext_resource path="res://assets/player/run/4.png" type="Texture" id=7]
 [ext_resource path="res://assets/player/run/5.png" type="Texture" id=8]
-[ext_resource path="res://assets/fonts/BerkshireSwash-Regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://assets/player/jump/0.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/jump/1.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/jump/2.png" type="Texture" id=11]
+[ext_resource path="res://assets/fonts/BerkshireSwash-Regular.ttf" type="DynamicFontData" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -21,14 +24,24 @@ animations = [ {
 "loop": true,
 "name": "run",
 "speed": 10.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "jump_start",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 11 ) ],
+"loop": false,
+"name": "jump_end",
+"speed": 2.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 40.5221, 44.3029 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 60
-font_data = ExtResource( 9 )
+font_data = ExtResource( 12 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1.10956, 0 )
@@ -38,13 +51,12 @@ script = ExtResource( 1 )
 position = Vector2( 9.15385, 5.54779 )
 scale = Vector2( 0.1, 0.1 )
 frames = SubResource( 1 )
-animation = "run"
-frame = 4
+animation = "jump_end"
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
 position = Vector2( 5.2704, 15.0206 )
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2( 400, -100 )
@@ -56,4 +68,3 @@ margin_top = -385.562
 margin_right = 46.7329
 margin_bottom = -338.562
 custom_fonts/font = SubResource( 3 )
-text = "Default test text"

@@ -10,7 +10,7 @@ var motion = Vector2()
 var my_delta = 0
 
 func _ready():
-	pass
+	$Sprite.animation = "run"
 
 func _physics_process(delta):
 	my_delta = 50 * delta
@@ -21,6 +21,11 @@ func _physics_process(delta):
 		
 	if is_on_floor() && Input.is_action_pressed("ui_up"):
 		motion.y = -v_speed
+		$Sprite.animation="jump_start"
+	if !is_on_floor() && motion.y>0:
+		$Sprite.animation="jump_end"
+	elif is_on_floor() && $Sprite.animation != "jump_start":
+		$Sprite.animation = "run"
 	
 	motion = move_and_slide(motion, UP)
 
