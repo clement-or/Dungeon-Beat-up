@@ -46,7 +46,7 @@ func _physics_process(delta):
 	if get_slide_count() > 0:
 		for i in range(get_slide_count()):
 			var collider = get_slide_collision(i).collider
-			if collider.has_method("is_enemy") && collider.is_enemy():
+			if collider && collider.has_method("is_enemy") && collider.is_enemy():
 				die()
 	
 	# Calculate physics

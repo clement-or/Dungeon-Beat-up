@@ -74,6 +74,8 @@ extents = Vector2( 24.2458, 68.8657 )
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1.10956, 0 )
 script = ExtResource( 1 )
+gravity = 60
+v_speed = 2000
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -10.2668 )
@@ -91,6 +93,7 @@ current = true
 process_mode = 0
 limit_smoothed = true
 smoothing_enabled = true
+smoothing_speed = 20.0
 
 [node name="TestLabel" type="Label" parent="."]
 margin_left = -40.1045

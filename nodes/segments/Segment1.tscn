@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://nodes/segments/Segment.gd" type="Script" id=1]
 [ext_resource path="res://nodes/enemies/Goblin.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/minecraft-tileset.png" type="Texture" id=3]
 [ext_resource path="res://assets/minecraft-tileset-dark.png" type="Texture" id=4]
 [ext_resource path="res://nodes/obstacles/Obstacle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://nodes/enemies/Bat.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 73.2733, 589.4 )
@@ -206,7 +207,6 @@ points = PoolVector2Array( 0, 0, 96, 0, 96, 96, 0, 96 )
 13/z_index = 0
 
 [node name="Level" type="Node2D"]
-editor/display_folded = true
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_vertical_guides_": [ 5087.79 ]
@@ -236,4 +236,13 @@ tile_data = PoolIntArray( 0, 5, 0, 1, 5, 0, 2, 5, 0, 3, 5, 0, 4, 5, 0, 5, 5, 0, 
 
 [node name="Obstacle" parent="." instance=ExtResource( 5 )]
 position = Vector2( 2733.28, 426.914 )
+
+[node name="Bat" parent="." instance=ExtResource( 6 )]
+position = Vector2( 3946.16, 191.018 )
+
+[node name="Bat2" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4332.86, 204.995 )
+
+[node name="Bat3" parent="." instance=ExtResource( 6 )]
+position = Vector2( 4747.51, 218.972 )
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]
