@@ -4,13 +4,13 @@ const UP = Vector2(0, -1)
 
 export var gravity = 30
 export var h_speed = 600
+export var is_moving_right = true
 
-var is_moving_right
 var is_dead = false
 var motion = Vector2(0,0)
+var can_change_dir = false
 
 func _ready():
-	is_moving_right = bool(randi()%2+0)
 	pass
 
 func _physics_process(delta):
@@ -23,6 +23,10 @@ func _physics_process(delta):
 			motion.x = h_speed
 		else:
 			motion.x = -h_speed
+	if is_on_wall() && can_change_dir:
+		is_moving_right = !is_moving_right
+		can_change_dir = false
+		$ChangeDirectionTimer.start()
 	
 	move_and_slide(motion,UP)
 
@@ -40,3 +44,6 @@ func delete():
 	
 func is_enemy():
 	return true
+
+func _on_ChangeDirectionTimer_timeout():
+	can_change_dir = true

@@ -21,6 +21,7 @@ func _physics_process(delta):
 	
 	if is_controllable:
 		motion.x += 0.3
+		motion.x = clamp(motion.x, 500, 100000)
 		
 		# Check Input
 		if is_on_floor():
@@ -34,12 +35,12 @@ func _physics_process(delta):
 			if Input.is_action_pressed("ui_up"):
 				motion.y = -v_speed
 				$Sprite.animation="jump_start"
-	
-	# Jump animation
-	if !is_on_floor() && motion.y>0:
-		$Sprite.animation="jump_end"
-	elif is_on_floor() && $Sprite.animation == "jump_end":
-		$Sprite.animation = "run"
+				
+		# Jump animation
+		if !is_on_floor() && motion.y>0:
+			$Sprite.animation="jump_end"
+		elif is_on_floor() && $Sprite.animation == "jump_end":
+			$Sprite.animation = "run"
 	
 	# Detect death
 	if get_slide_count() > 0:
@@ -62,22 +63,37 @@ func die():
 	
 func stun():
 	is_controllable = false
+	motion.x = -100
+	$Sprite.animation = "hit"
+	$StunTimer.start();
 	
 #func is_attacking():
 #	return $Sprite.animation == "attack"
 
 func _on_Player_hits(body):
+	if body.has_method("is_enemy") && body.is_enemy():
 		body.die()
 
 func _on_Player_stops_attacking():
-	
-	# Player stops attacking
 	if $Sprite.animation == "attack":
 		can_attack = false
 		$Sprite.animation = "run"
 		$AttackRange/CollisionShape.disabled = true
 		
-	# Player has finished dying
+func _on_Player_stopped_dying():
+	pass
 
 func _on_AttackCooldown_timeout():
 	can_attack = true
+
+func _on_hit_animation_finished():
+	if $Sprite.animation == "hit":
+		$Sprite.animation = "stun"
+		$Sprite.play()
+		motion.x = 0
+
+
+func _on_Player_stops_stun():
+	$Sprite.animation = "run"
+	is_controllable = true
+	$AttackRange/CollisionShape.disabled = true

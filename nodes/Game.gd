@@ -1,7 +1,8 @@
 extends Node2D
 
 var segments = [
-	preload("res://nodes/Level.tscn")
+	preload("res://nodes/segments/Segment1.tscn"),
+	preload("res://nodes/segments/Segment2.tscn")
 ]
 var current_segments = [
 	null,

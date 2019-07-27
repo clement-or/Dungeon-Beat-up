@@ -1,17 +1,17 @@
 [gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://nodes/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/player/attack/floor_1.png" type="Texture" id=2]
-[ext_resource path="res://assets/player/attack/floor_2.png" type="Texture" id=3]
-[ext_resource path="res://assets/player/die/0.png" type="Texture" id=4]
-[ext_resource path="res://assets/player/die/1.png" type="Texture" id=5]
-[ext_resource path="res://assets/player/die/2.png" type="Texture" id=6]
-[ext_resource path="res://assets/player/die/3.png" type="Texture" id=7]
-[ext_resource path="res://assets/skeleton.png" type="Texture" id=8]
-[ext_resource path="res://assets/player/run/0.png" type="Texture" id=9]
-[ext_resource path="res://assets/player/run/1.png" type="Texture" id=10]
-[ext_resource path="res://assets/player/run/2.png" type="Texture" id=11]
-[ext_resource path="res://assets/player/run/3.png" type="Texture" id=12]
+[ext_resource path="res://assets/player/die/0.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/die/1.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/die/2.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/die/3.png" type="Texture" id=5]
+[ext_resource path="res://assets/skeleton.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/run/0.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/run/1.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/run/2.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/run/3.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/attack/floor_1.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/attack/floor_2.png" type="Texture" id=12]
 [ext_resource path="res://assets/player/jump/0.png" type="Texture" id=13]
 [ext_resource path="res://assets/player/jump/1.png" type="Texture" id=14]
 [ext_resource path="res://assets/player/jump/2.png" type="Texture" id=15]
@@ -19,25 +19,35 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ) ],
 "loop": false,
-"name": "attack",
-"speed": 10.0
+"name": "hit",
+"speed": 3.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": false,
 "name": "die",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 8 ) ],
+"frames": [ ExtResource( 6 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "run",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 3 ), null ],
+"loop": true,
+"name": "stun",
+"speed": 16.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 11 ) ],
+"loop": false,
+"name": "attack",
+"speed": 10.0
 }, {
 "frames": [ ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": false,
@@ -50,7 +60,7 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 51.3332
 height = 90.4339
 
@@ -58,7 +68,7 @@ height = 90.4339
 size = 60
 font_data = ExtResource( 16 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 24.2458, 68.8657 )
 
 [node name="Player" type="KinematicBody2D"]
@@ -69,12 +79,11 @@ script = ExtResource( 1 )
 position = Vector2( 0, -10.2668 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 1 )
-animation = "run"
-frame = 2
+animation = "walk"
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="Camera" type="Camera2D" parent="."]
 offset = Vector2( 500, 0 )
@@ -90,17 +99,22 @@ margin_right = 93.8955
 margin_bottom = -140.367
 custom_fonts/font = SubResource( 3 )
 
-[node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-
 [node name="AttackRange" type="Area2D" parent="."]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="AttackRange"]
 position = Vector2( 80, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 4 )
 disabled = true
-[connection signal="animation_finished" from="Sprite" to="." method="_on_Player_stopped_dying"]
+
+[node name="StunTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+[connection signal="animation_finished" from="Sprite" to="." method="_on_hit_animation_finished"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Player_stops_attacking"]
-[connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Player_stopped_dying"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_Player_hits"]
+[connection signal="timeout" from="StunTimer" to="." method="_on_Player_stops_stun"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]

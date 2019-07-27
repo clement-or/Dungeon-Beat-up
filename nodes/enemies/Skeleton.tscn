@@ -32,4 +32,8 @@ shape = SubResource( 2 )
 
 [node name="DieTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ChangeDirectionTimer" type="Timer" parent="."]
+wait_time = 0.5
 [connection signal="timeout" from="DieTimer" to="." method="delete"]
+[connection signal="timeout" from="ChangeDirectionTimer" to="." method="_on_ChangeDirectionTimer_timeout"]
