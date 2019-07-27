@@ -189,6 +189,5 @@ shape = SubResource( 9 )
 position = Vector2( 5088, 0 )
 
 [node name="Goblin" parent="." instance=ExtResource( 4 )]
-position = Vector2( 865.21, 125.228 )
+position = Vector2( 2427.41, 337.926 )
 [connection signal="body_entered" from="End" to="." method="_on_End_body_entered"]
-[connection signal="hit_player" from="Goblin" to="." method="_on_Goblin_hit_player"]

@@ -1,51 +1,56 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://nodes/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/skeleton.png" type="Texture" id=2]
-[ext_resource path="res://assets/player/run/0.png" type="Texture" id=3]
-[ext_resource path="res://assets/player/run/1.png" type="Texture" id=4]
-[ext_resource path="res://assets/player/run/2.png" type="Texture" id=5]
-[ext_resource path="res://assets/player/run/3.png" type="Texture" id=6]
-[ext_resource path="res://assets/player/jump/0.png" type="Texture" id=7]
-[ext_resource path="res://assets/player/jump/1.png" type="Texture" id=8]
-[ext_resource path="res://assets/player/jump/2.png" type="Texture" id=9]
-[ext_resource path="res://assets/fonts/BerkshireSwash-Regular.ttf" type="DynamicFontData" id=10]
+[ext_resource path="res://assets/player/attack/floor_1.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/attack/floor_2.png" type="Texture" id=3]
+[ext_resource path="res://assets/skeleton.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/run/0.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/run/1.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/run/2.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/run/3.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/jump/0.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/jump/1.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/jump/2.png" type="Texture" id=11]
+[ext_resource path="res://assets/fonts/BerkshireSwash-Regular.ttf" type="DynamicFontData" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 3 ), ExtResource( 2 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "attack",
+"speed": 10.0
+}, {
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "run",
 "speed": 8.0
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": false,
 "name": "jump_start",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 11 ) ],
 "loop": false,
 "name": "jump_end",
 "speed": 2.0
 } ]
 
-<<<<<<< HEAD
 [sub_resource type="CapsuleShape2D" id=4]
 radius = 51.3332
 height = 90.4339
-=======
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 32.5784, 48.7338 )
->>>>>>> master
 
 [sub_resource type="DynamicFont" id=3]
 size = 60
-font_data = ExtResource( 10 )
+font_data = ExtResource( 12 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 24.2458, 68.8657 )
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1.10956, 0 )
@@ -55,12 +60,8 @@ script = ExtResource( 1 )
 position = Vector2( 9.15385, 5.54779 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 1 )
-animation = "run"
-<<<<<<< HEAD
-frame = 2
-=======
+animation = "attack"
 frame = 4
->>>>>>> master
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
@@ -68,10 +69,11 @@ position = Vector2( 17.2452, 15.0206 )
 shape = SubResource( 4 )
 
 [node name="Camera" type="Camera2D" parent="."]
-offset = Vector2( 400, -100 )
+offset = Vector2( 650, 0 )
 current = true
+process_mode = 0
+limit_smoothed = true
 smoothing_enabled = true
-smoothing_speed = 20.0
 
 [node name="TestLabel" type="Label" parent="."]
 margin_left = -87.2671
@@ -79,3 +81,16 @@ margin_top = -385.562
 margin_right = 46.7329
 margin_bottom = -338.562
 custom_fonts/font = SubResource( 3 )
+
+[node name="AttackCooldown" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="AttackRange" type="Area2D" parent="."]
+
+[node name="CollisionShape" type="CollisionShape2D" parent="AttackRange"]
+position = Vector2( 105.797, 22.689 )
+shape = SubResource( 5 )
+disabled = true
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_Player_stop_attacking"]
+[connection signal="body_entered" from="AttackRange" to="." method="_on_Player_hits"]

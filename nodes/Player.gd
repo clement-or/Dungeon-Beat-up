@@ -7,36 +7,57 @@ export var h_speed = 2000
 export var v_speed = 1000
 
 var motion = Vector2()
-var my_delta = 0
 
 func _ready():
 	$Sprite.animation = "run"
 
 func _physics_process(delta):
-	my_delta = 50 * delta
 	
 	# Calculer la gravité
-	motion.y += my_delta * gravity
-	motion.x = my_delta * h_speed
+	motion.y += gravity
+	motion.x = h_speed
+	
+	# Check Input
+	if is_on_floor():
+		#Attack
+		if Input.is_action_just_pressed("ui_accept"):
+			$Sprite.animation="attack"
+			$AttackRange/CollisionShape.disabled = false
+			$AttackCooldown.start()
 		
-	if is_on_floor() && Input.is_action_pressed("ui_up"):
-		motion.y = -v_speed
-		$Sprite.animation="jump_start"
+		#Jump
+		if Input.is_action_pressed("ui_up"):
+			motion.y = -v_speed
+			$Sprite.animation="jump_start"
+	
+	# Jump animation
 	if !is_on_floor() && motion.y>0:
 		$Sprite.animation="jump_end"
-	elif is_on_floor() && $Sprite.animation != "jump_start":
+	elif is_on_floor() && $Sprite.animation == "jump_end":
 		$Sprite.animation = "run"
 	
-	motion = move_and_slide(motion, UP)
-	
+	# Detect death
 	if get_slide_count() > 0:
 		for i in range(get_slide_count()):
-			if "Goblin" in get_slide_collision(i).collider.name:
+			if "Goblin" in get_slide_collision(i).collider.get_name():
 				die()
+	
+	# Calculate physics
+	motion = move_and_slide(motion, UP)
 
 func set_text(text):
 	$TestLabel.text = text
 
 func die():
 	set_text("Ugh I am Dead")
-	pass
+	
+func is_attacking():
+	return $Sprite.animation == "attack"
+
+func _on_Player_stop_attacking():
+	$Sprite.animation = "run"
+	$AttackRange/CollisionShape.disabled = true
+
+
+func _on_Player_hits(body):
+		body.die()

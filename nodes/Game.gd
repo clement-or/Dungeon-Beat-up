@@ -33,4 +33,3 @@ func _on_Level_end_reached():
 
 func _on_player_hit():
 	$Player.die()
-	print("Oh no")
