@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Dungeon Beat'up"
-run/main_scene="res://nodes/Game.tscn"
+run/main_scene="res://nodes/Menu.tscn"
 config/icon="res://icon.png"
 
 [debug]
@@ -26,6 +26,10 @@ gdscript/warnings/enable=false
 gdscript/warnings/unused_variable=false
 gdscript/warnings/unused_class_variable=false
 gdscript/warnings/unused_argument=false
+
+[display]
+
+window/size/resizable=false
 
 [global]
 

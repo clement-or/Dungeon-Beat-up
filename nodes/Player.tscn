@@ -1,79 +1,77 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://nodes/Player.gd" type="Script" id=1]
-[ext_resource path="res://assets/player/die/0.png" type="Texture" id=2]
-[ext_resource path="res://assets/player/die/1.png" type="Texture" id=3]
-[ext_resource path="res://assets/player/die/2.png" type="Texture" id=4]
-[ext_resource path="res://assets/player/die/3.png" type="Texture" id=5]
-[ext_resource path="res://assets/player/run/0.png" type="Texture" id=6]
-[ext_resource path="res://assets/player/run/1.png" type="Texture" id=7]
-[ext_resource path="res://assets/player/run/2.png" type="Texture" id=8]
-[ext_resource path="res://assets/player/run/3.png" type="Texture" id=9]
-[ext_resource path="res://assets/skeleton.png" type="Texture" id=10]
-[ext_resource path="res://assets/player/attack/floor_1.png" type="Texture" id=11]
-[ext_resource path="res://assets/player/attack/floor_2.png" type="Texture" id=12]
-[ext_resource path="res://assets/player/jump/0.png" type="Texture" id=13]
-[ext_resource path="res://assets/player/jump/1.png" type="Texture" id=14]
-[ext_resource path="res://assets/player/jump/2.png" type="Texture" id=15]
-[ext_resource path="res://assets/player/jump_attack/1.png" type="Texture" id=16]
-[ext_resource path="res://assets/fonts/BerkshireSwash-Regular.ttf" type="DynamicFontData" id=17]
-[ext_resource path="res://nodes/Player.tres" type="Animation" id=18]
+[ext_resource path="res://assets/player/die/2R.png" type="Texture" id=2]
+[ext_resource path="res://assets/player/die/3R.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/die/4R.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/run/1.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/run/2.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/run/3.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/run/4.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/die/1R.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/attack/IMG_0001.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/attack/IMG_0002.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/jump/1.png" type="Texture" id=12]
+[ext_resource path="res://assets/player/jump/2.png" type="Texture" id=13]
+[ext_resource path="res://assets/player/jump/3.png" type="Texture" id=14]
+[ext_resource path="res://assets/player/jump_attack/1.png" type="Texture" id=15]
+[ext_resource path="res://assets/player/jump_attack/2.png" type="Texture" id=16]
+[ext_resource path="res://assets/player/jump_attack/3.png" type="Texture" id=17]
+[ext_resource path="res://assets/player/jump_attack/4.png" type="Texture" id=18]
+[ext_resource path="res://assets/fonts/BerkshireSwash-Regular.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://nodes/Player.tres" type="Animation" id=20]
+[ext_resource path="res://nodes/HUD/RestartPopup.tscn" type="PackedScene" id=21]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": false,
 "name": "die",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), null ],
+"frames": [ ExtResource( 2 ), ExtResource( 2 ), null ],
 "loop": true,
 "name": "stun",
 "speed": 16.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "run",
-"speed": 8.0
+"speed": 10.0
 }, {
-"frames": [ ExtResource( 10 ) ],
-"loop": true,
-"name": "walk",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 9 ) ],
 "loop": false,
 "name": "hit",
 "speed": 3.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 12 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 11 ), ExtResource( 11 ) ],
 "loop": false,
 "name": "attack",
 "speed": 10.0
 }, {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ) ],
+"frames": [ ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": false,
 "name": "jump_start",
-"speed": 5.0
+"speed": 10.0
 }, {
-"frames": [ ExtResource( 15 ) ],
+"frames": [ ExtResource( 14 ) ],
 "loop": false,
 "name": "jump_end",
 "speed": 2.0
 }, {
-"frames": [ ExtResource( 16 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 18 ) ],
 "loop": false,
 "name": "jump_attack",
-"speed": 9.0
+"speed": 15.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 51.3332
-height = 90.4339
+height = 144.294
 
 [sub_resource type="DynamicFont" id=3]
 size = 60
-font_data = ExtResource( 17 )
+font_data = ExtResource( 19 )
 
 [sub_resource type="Animation" id=10]
 resource_name = "Combo0"
@@ -103,7 +101,7 @@ tracks/1/keys = {
 "values": [ Vector2( 2, 2 ), Vector2( 2.5, 2.5 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=14]
 resource_name = "Combo1"
 length = 0.5
 tracks/0/type = "value"
@@ -136,7 +134,7 @@ extents = Vector2( 24.2458, 123.355 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 100
-font_data = ExtResource( 17 )
+font_data = ExtResource( 19 )
 
 [sub_resource type="Animation" id=7]
 resource_name = "Combo0"
@@ -178,7 +176,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 2, 2 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=12]
 resource_name = "Combo1"
 length = 0.4
 tracks/0/type = "value"
@@ -218,7 +216,7 @@ tracks/2/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 2, 2 ), Vector2( 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=13]
 resource_name = "Hit1"
 length = 0.4
 tracks/0/type = "value"
@@ -266,21 +264,16 @@ v_speed = 2000
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -10.2668 )
-scale = Vector2( 0.2, 0.2 )
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "run"
+frame = 1
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2( 17.1475, 3.60999 )
+position = Vector2( 0, 3.60999 )
+rotation = 0.349066
 shape = SubResource( 2 )
-
-[node name="TestLabel" type="Label" parent="."]
-margin_left = -40.1045
-margin_top = -215.367
-margin_right = 93.8955
-margin_bottom = -140.367
-custom_fonts/font = SubResource( 3 )
 
 [node name="Hit" type="Label" parent="."]
 margin_left = 148.89
@@ -293,7 +286,7 @@ custom_fonts/font = SubResource( 3 )
 
 [node name="anim" type="AnimationPlayer" parent="Hit"]
 anims/Combo0 = SubResource( 10 )
-anims/Combo1 = SubResource( 11 )
+anims/Combo1 = SubResource( 14 )
 
 [node name="AttackRange" type="Area2D" parent="."]
 
@@ -303,10 +296,6 @@ shape = SubResource( 4 )
 disabled = true
 
 [node name="StunTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.5
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -334,17 +323,20 @@ align = 1
 [node name="anim" type="AnimationPlayer" parent="Camera2D/HUD/Score"]
 playback_process_mode = 0
 anims/Combo0 = SubResource( 7 )
-anims/Combo1 = SubResource( 8 )
-anims/Hit0 = ExtResource( 18 )
-anims/Hit1 = SubResource( 6 )
+anims/Combo1 = SubResource( 12 )
+anims/Hit0 = ExtResource( 20 )
+anims/Hit1 = SubResource( 13 )
+
+[node name="RestartPopup" parent="Camera2D/HUD" instance=ExtResource( 21 )]
 
 [node name="ComboTimer" type="Timer" parent="."]
 process_mode = 0
 one_shot = true
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Player_stops_attacking"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Player_stopped_dying"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_hit_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_Player_hits"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_Player_stops_stun"]
-[connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]
 [connection signal="timeout" from="ComboTimer" to="." method="_on_ComboTimer_timeout"]

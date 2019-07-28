@@ -19,9 +19,9 @@ func _physics_process(delta):
 	if is_on_floor(): motion.y = 0;
 	if !is_dead:
 		if is_moving_right:
-			motion.x = h_speed
-		else:
 			motion.x = -h_speed
+		else:
+			motion.x = h_speed
 	
 	move_and_slide(motion,UP)
 

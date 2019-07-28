@@ -8,3 +8,5 @@ script = ExtResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 gravity = 90
+
+[node name="Musique" type="AudioStreamPlayer2D" parent="."]

@@ -1,19 +1,24 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://nodes/enemies/Skeleton.gd" type="Script" id=1]
-[ext_resource path="res://assets/skeleton/run/0.png" type="Texture" id=2]
-[ext_resource path="res://assets/skeleton/run/1.png" type="Texture" id=3]
+[ext_resource path="res://assets/skeleton/4.png" type="Texture" id=2]
+[ext_resource path="res://assets/skeleton/5.png" type="Texture" id=3]
+[ext_resource path="res://assets/skeleton/6.png" type="Texture" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 3 ) ],
 "loop": true,
 "name": "run",
-"speed": 5.0
+"speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 51.6658, 87.5416 )
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 64.3751
+height = 98.0266
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 74.4601, 7.86548 )
 
 [node name="Skeleton" type="KinematicBody2D"]
 collision_mask = 2
@@ -21,14 +26,18 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="AnimatedSprite" parent="."]
 position = Vector2( -0.557401, 0.616116 )
-scale = Vector2( 0.15, 0.15 )
+scale = Vector2( 0.5, 0.5 )
 frames = SubResource( 1 )
 animation = "run"
-frame = 1
-playing = true
 
 [node name="Collisionbox" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -20.1183 )
+rotation = -0.349066
 shape = SubResource( 2 )
+
+[node name="Collisionbox2" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 122.318 )
+shape = SubResource( 3 )
 
 [node name="DieTimer" type="Timer" parent="."]
 one_shot = true

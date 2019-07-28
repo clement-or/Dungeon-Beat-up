@@ -1,0 +1,189 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://nodes/HUD/RestartPopup.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/BerkshireSwash-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/fonts/CevicheOne-Regular.otf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 50
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
+font_data = ExtResource( 3 )
+
+[sub_resource type="Animation" id=6]
+resource_name = "loop"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.8, 0.8 ), Vector2( 1, 1 ), Vector2( 0.8, 0.8 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath("anim:root_node")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( -0.1, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ NodePath(".."), NodePath("../../../../../../../../../../../../../../../../../../../../../..") ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath("anim:root_node")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/keys = {
+"times": PoolRealArray( -0.1, 0, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ NodePath(".."), NodePath(".."), NodePath("../../../../../../../../../../../../../../../../../../../../../..") ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[node name="RestartPopup" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 310.0 ],
+"_edit_vertical_guides_": [ 520.0 ]
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 180.0
+margin_top = 90.0
+margin_right = 860.0
+margin_bottom = 530.0
+rect_pivot_offset = Vector2( 340, 220 )
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+margin_right = 680.0
+margin_bottom = 440.0
+color = Color( 0.156863, 0.156863, 0.156863, 1 )
+
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 60.0
+margin_top = 10.0
+margin_right = 615.0
+margin_bottom = 135.0
+rect_pivot_offset = Vector2( 280, 62.5 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.176471 )
+custom_constants/shadow_offset_x = 11
+custom_constants/shadow_offset_y = 5
+text = "You Dieded !"
+
+[node name="Score" type="Label" parent="Panel"]
+margin_left = 30.0
+margin_top = 160.0
+margin_right = 310.0
+margin_bottom = 223.0
+rect_pivot_offset = Vector2( 280, 62.5 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.176471 )
+custom_constants/shadow_offset_x = 11
+custom_constants/shadow_offset_y = 5
+text = "Score : "
+
+[node name="Hiscore" type="Label" parent="Panel"]
+margin_left = 360.0
+margin_top = 160.0
+margin_right = 640.0
+margin_bottom = 223.0
+rect_pivot_offset = Vector2( 280, 62.5 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.176471 )
+custom_constants/shadow_offset_x = 11
+custom_constants/shadow_offset_y = 5
+text = "Hi-score : "
+
+[node name="Button" type="Button" parent="Panel"]
+margin_left = 184.0
+margin_top = 250.0
+margin_right = 490.0
+margin_bottom = 324.0
+custom_fonts/font = SubResource( 3 )
+text = "RESTART"
+
+[node name="Quit" type="Button" parent="Panel"]
+margin_left = 184.0
+margin_top = 340.0
+margin_right = 490.0
+margin_bottom = 414.0
+custom_fonts/font = SubResource( 3 )
+text = "MENU"
+
+[node name="New" type="Label" parent="Panel"]
+visible = false
+margin_left = 373.959
+margin_top = 379.033
+margin_right = 723.959
+margin_bottom = 503.033
+rect_rotation = -10.0
+rect_scale = Vector2( 0.995561, 0.995561 )
+rect_pivot_offset = Vector2( 175, 38.1116 )
+custom_fonts/font = SubResource( 3 )
+text = "NEW HI-SCORE"
+
+[node name="anim" type="AnimationPlayer" parent="Panel/New"]
+autoplay = "loop"
+anims/loop = SubResource( 6 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="anim" type="AnimationPlayer" parent="ColorRect"]
+anims/fade_in = SubResource( 5 )
+anims/fade_out = SubResource( 4 )
+[connection signal="pressed" from="Panel/Button" to="." method="fade_out"]
+[connection signal="pressed" from="Panel/Quit" to="." method="quit"]
+[connection signal="animation_finished" from="ColorRect/anim" to="." method="_on_anim_animation_finished"]

@@ -38,3 +38,6 @@ func _on_Level_end_reached():
 
 func _on_player_hit():
 	$Player.die()
+
+func _on_game_over():
+	$RestartPopup.visible = true
