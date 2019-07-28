@@ -28,6 +28,7 @@ animation = "walk"
 shape = SubResource( 2 )
 
 [node name="DieTimer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
 
 [node name="DirectionChangeTimer" type="Timer" parent="."]

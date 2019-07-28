@@ -1,50 +1,52 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://nodes/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/player/die/0.png" type="Texture" id=2]
 [ext_resource path="res://assets/player/die/1.png" type="Texture" id=3]
 [ext_resource path="res://assets/player/die/2.png" type="Texture" id=4]
 [ext_resource path="res://assets/player/die/3.png" type="Texture" id=5]
-[ext_resource path="res://assets/skeleton.png" type="Texture" id=6]
-[ext_resource path="res://assets/player/run/0.png" type="Texture" id=7]
-[ext_resource path="res://assets/player/run/1.png" type="Texture" id=8]
-[ext_resource path="res://assets/player/run/2.png" type="Texture" id=9]
-[ext_resource path="res://assets/player/run/3.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/run/0.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/run/1.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/run/2.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/run/3.png" type="Texture" id=9]
+[ext_resource path="res://assets/skeleton.png" type="Texture" id=10]
 [ext_resource path="res://assets/player/attack/floor_1.png" type="Texture" id=11]
 [ext_resource path="res://assets/player/attack/floor_2.png" type="Texture" id=12]
 [ext_resource path="res://assets/player/jump/0.png" type="Texture" id=13]
 [ext_resource path="res://assets/player/jump/1.png" type="Texture" id=14]
 [ext_resource path="res://assets/player/jump/2.png" type="Texture" id=15]
-[ext_resource path="res://assets/fonts/BerkshireSwash-Regular.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://assets/player/jump_attack/1.png" type="Texture" id=16]
+[ext_resource path="res://assets/fonts/BerkshireSwash-Regular.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://nodes/Player.tres" type="Animation" id=18]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
-"loop": false,
-"name": "hit",
-"speed": 3.0
-}, {
 "frames": [ ExtResource( 2 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": false,
 "name": "die",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 6 ) ],
-"loop": true,
-"name": "walk",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "run",
-"speed": 8.0
 }, {
 "frames": [ ExtResource( 3 ), null ],
 "loop": true,
 "name": "stun",
 "speed": 16.0
 }, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 12 ), ExtResource( 11 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "run",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 10 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": false,
+"name": "hit",
+"speed": 3.0
+}, {
+"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 12 ), ExtResource( 12 ) ],
 "loop": false,
 "name": "attack",
 "speed": 10.0
@@ -58,6 +60,11 @@ animations = [ {
 "loop": false,
 "name": "jump_end",
 "speed": 2.0
+}, {
+"frames": [ ExtResource( 16 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "jump_attack",
+"speed": 9.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -66,10 +73,190 @@ height = 90.4339
 
 [sub_resource type="DynamicFont" id=3]
 size = 60
-font_data = ExtResource( 16 )
+font_data = ExtResource( 17 )
+
+[sub_resource type="Animation" id=10]
+resource_name = "Combo0"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 0.0743255, 0.258816, 1 ),
+"update": 0,
+"values": [ -5.0, -10.0, 20.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 0.0693482, 0.105112, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2.5, 2.5 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "Combo1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 0.0743255, 0.392292, 1 ),
+"update": 0,
+"values": [ 5.0, 10.0, 15.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 0.0693482, 0.105112, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2.5, 2.5 ), Vector2( 1, 1 ) ]
+}
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 24.2458, 68.8657 )
+extents = Vector2( 24.2458, 123.355 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 100
+font_data = ExtResource( 17 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "Combo0"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 0.0883884, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 24.0, -18.0, 6.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:custom_fonts/font:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.196146 ),
+"update": 1,
+"values": [ 100 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 0.120742, 0.116629, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Combo1"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 0.0883884, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -24.0, 18.0, -6.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:custom_fonts/font:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.196146 ),
+"update": 1,
+"values": [ 100 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 0.120742, 0.116629, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Hit1"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 0.0883884, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -12.0, 6.0, -3.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:custom_fonts/font:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 0.196146 ),
+"update": 1,
+"values": [ 100 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 0.120742, 0.116629, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.5, 1.5 ), Vector2( 1, 1 ) ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 1.10956, 0 )
@@ -81,19 +268,12 @@ v_speed = 2000
 position = Vector2( 0, -10.2668 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 1 )
-animation = "walk"
+animation = "run"
 playing = true
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2( 17.1475, 3.60999 )
 shape = SubResource( 2 )
-
-[node name="Camera" type="Camera2D" parent="."]
-offset = Vector2( 500, 0 )
-current = true
-process_mode = 0
-limit_smoothed = true
-smoothing_enabled = true
-smoothing_speed = 20.0
 
 [node name="TestLabel" type="Label" parent="."]
 margin_left = -40.1045
@@ -102,10 +282,23 @@ margin_right = 93.8955
 margin_bottom = -140.367
 custom_fonts/font = SubResource( 3 )
 
+[node name="Hit" type="Label" parent="."]
+margin_left = 148.89
+margin_top = -40.0
+margin_right = 282.89
+margin_bottom = 35.0
+rect_rotation = 5.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = SubResource( 3 )
+
+[node name="anim" type="AnimationPlayer" parent="Hit"]
+anims/Combo0 = SubResource( 10 )
+anims/Combo1 = SubResource( 11 )
+
 [node name="AttackRange" type="Area2D" parent="."]
 
 [node name="CollisionShape" type="CollisionShape2D" parent="AttackRange"]
-position = Vector2( 80, 0 )
+position = Vector2( 80, 19.3445 )
 shape = SubResource( 4 )
 disabled = true
 
@@ -115,9 +308,43 @@ one_shot = true
 [node name="AttackCooldown" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
-[connection signal="animation_finished" from="Sprite" to="." method="_on_hit_animation_finished"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( -300, 0 )
+anchor_mode = 0
+current = true
+zoom = Vector2( 2, 2 )
+limit_top = -300
+limit_bottom = 0
+limit_smoothed = true
+smoothing_enabled = true
+
+[node name="HUD" type="CanvasLayer" parent="Camera2D"]
+
+[node name="Score" type="Label" parent="Camera2D/HUD"]
+margin_left = -10.0
+margin_top = -10.0
+margin_right = 1026.0
+margin_bottom = 177.0
+rect_pivot_offset = Vector2( 500.688, 78.6779 )
+custom_fonts/font = SubResource( 5 )
+text = "30"
+align = 1
+
+[node name="anim" type="AnimationPlayer" parent="Camera2D/HUD/Score"]
+playback_process_mode = 0
+anims/Combo0 = SubResource( 7 )
+anims/Combo1 = SubResource( 8 )
+anims/Hit0 = ExtResource( 18 )
+anims/Hit1 = SubResource( 6 )
+
+[node name="ComboTimer" type="Timer" parent="."]
+process_mode = 0
+one_shot = true
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Player_stops_attacking"]
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Player_stopped_dying"]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_hit_animation_finished"]
 [connection signal="body_entered" from="AttackRange" to="." method="_on_Player_hits"]
 [connection signal="timeout" from="StunTimer" to="." method="_on_Player_stops_stun"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_AttackCooldown_timeout"]
+[connection signal="timeout" from="ComboTimer" to="." method="_on_ComboTimer_timeout"]

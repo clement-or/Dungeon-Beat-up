@@ -14,14 +14,11 @@ func _ready():
 func _physics_process(delta):
 	
 	if !is_dead:
-		motion.y = sin(motion.y)*v_speed
-	
-#	if !is_dead:
-#		if !is_moving_up:
-#			motion.y = v_speed
-#
-#		else:
-#			motion.y = -v_speed
+		if !is_moving_up:
+			motion.y = v_speed
+
+		else:
+			motion.y = -v_speed
 
 	
 	move_and_slide(motion,UP)
@@ -29,7 +26,7 @@ func _physics_process(delta):
 func die():
 	is_dead = true
 	$Sprite.stop()
-	motion = Vector2(2000, 0)
+	motion = Vector2(1000, -1000)
 	move_and_slide(motion,UP)
 	set_collision_layer(2)
 	set_collision_mask(2)
